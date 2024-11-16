@@ -1,0 +1,6 @@
+[submodule "caracal/felis"]
+	path = caracal/felis
+	url = https://github.com/Scofield626/felis.git
+[submodule "caracal/felis-controller"]
+	path = caracal/felis-controller
+	url = https://github.com/Scofield626/felis-controller.git
