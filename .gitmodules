@@ -4,3 +4,6 @@
 [submodule "caracal/felis-controller"]
 	path = caracal/felis-controller
 	url = https://github.com/Scofield626/felis-controller.git
+[submodule "doradd"]
+	path = doradd
+	url = https://github.com/Scofield626/doradd.git
