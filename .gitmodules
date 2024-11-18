@@ -6,7 +6,7 @@
 	url = https://github.com/Scofield626/felis-controller.git
 [submodule "doradd"]
 	path = doradd
-	url = https://github.com/Scofield626/doradd.git
+	url = https://github.com/doradd-rt/doradd.git
 [submodule "doradd-server"]
 	path = doradd-server
 	url = https://github.com/doradd-rt/doradd-server
