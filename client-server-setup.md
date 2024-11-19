@@ -38,7 +38,7 @@
     
     **[TODO]**: add setup for d6515 or other potential nodes?
     
-    For instance, if you are using two c6525-25g nodes (with no-interswitch link), choose the first mlx5 interface (port 2) below.
+    For instance, if you are using two c6525-25g nodes (with no-interswitch link), choose the 3rd mlx5 interface (port 2) below.
     
     ```bash
     enp65s0f0np0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -53,18 +53,30 @@
     in the `src/arp-config.h`, modify the 3rd entry as this mac address. Note: picking the 3rd entry is because that we set up a `192.168.1.3` as default ip (line 11 in `src/config.h`) for the client and we used the last digit for L2 forwarding.
     
     And you should also modify `PORT_ID` in `src/config.h` as 2 for c6525-25g nodes. 
+
+    To figure out port mapping, use the `<DPDK_DIR>/usertools/dpdk-devbind.py -s`. You will see output similar to below.
+
+    ```bash
+    Network devices using kernel driver
+    ===================================
+    0000:01:00.0 'MT27800 Family [ConnectX-5] 1017' if=eno33np0 drv=mlx5_core unused=vfio-pci *Active*
+    0000:01:00.1 'MT27800 Family [ConnectX-5] 1017' if=eno34np1 drv=mlx5_core unused=vfio-pci
+    0000:41:00.0 'MT27800 Family [ConnectX-5] 1017' if=enp65s0f0np0 drv=mlx5_core unused=vfio-pci
+    0000:41:00.1 'MT27800 Family [ConnectX-5] 1017' if=enp65s0f1np1 drv=mlx5_core unused=vfio-pci
+    ```
     
-    **[TODO]**: add why this is 2.
+6. Run the server
+    ```bash
+    sudo taskset -c 1-12 ./server
+    ```
     
-5. Run the server
-    
-    `sudo taskset -c 1-12 ./server`
-    
-6. Run the client
+7. Run the client
     1. prepare the ycsb logs (**[TODO]**)
     2. run the client
     
-    `sudo ./client -l 4-12 -- -i 100 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -d 10 -t 192.168.1.2 -d 30 -l /tmp/test.log`
+    ```bash
+    sudo ./client -l 4-12 -- -i 100 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 30 -l /tmp/test.log
+    ```
 
 ### Issues / things to watch out for
 
