@@ -58,6 +58,7 @@
 6. Run the server
 
     ```bash
+    ninja
     sudo taskset -c 1-12 ./server
     ```
     
@@ -67,6 +68,7 @@
     2. run the client
     
     ```bash
+    ninja
     sudo ./client -l 4-12 -- -i 100 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 30 -l /tmp/test.log
     ```
 
