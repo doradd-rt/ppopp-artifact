@@ -38,24 +38,8 @@
     
     **[TODO]**: add setup for d6515 or other potential nodes?
     
-    For instance, if you are using two c6525-25g nodes (with no-interswitch link), choose the 3rd mlx5 interface (port 2) below.
-    
-    ```bash
-    enp65s0f0np0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-            inet6 fe80::e42:a1ff:fedd:5824  prefixlen 64  scopeid 0x20<link>
-            ether 0c:42:a1:dd:58:24  txqueuelen 1000  (Ethernet)
-            RX packets 18  bytes 1476 (1.4 KB)
-            RX errors 0  dropped 0  overruns 0  frame 0
-            TX packets 40  bytes 3112 (3.1 KB)
-            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-    ```
-    
-    in the `src/arp-config.h`, modify the 3rd entry as this mac address. Note: picking the 3rd entry is because that we set up a `192.168.1.3` as default ip (line 11 in `src/config.h`) for the client and we used the last digit for L2 forwarding.
-    
-    And you should also modify `PORT_ID` in `src/config.h` as 2 for c6525-25g nodes. 
-
-    To figure out port mapping, use the `<DPDK_DIR>/usertools/dpdk-devbind.py -s`. You will see output similar to below.
-
+    For instance, if you are using two c6525-25g nodes (with no-interswitch link), choose the mlx5 interface - `enp65s0f0np0`. Then you should obtain (1) its **mac address** (using `ip link` or `ifconfig`) and 2) **dpdk port id** as follows.
+    To figure out port mapping, use the `<DPDK_DIR>/usertools/dpdk-devbind.py -s`. You will see output similar to below. Given `enp65s0f0np0` is the 3rd port listed, `PORT_ID` is 2.
     ```bash
     Network devices using kernel driver
     ===================================
@@ -64,13 +48,21 @@
     0000:41:00.0 'MT27800 Family [ConnectX-5] 1017' if=enp65s0f0np0 drv=mlx5_core unused=vfio-pci
     0000:41:00.1 'MT27800 Family [ConnectX-5] 1017' if=enp65s0f1np1 drv=mlx5_core unused=vfio-pci
     ```
+    Then, one should make the following modifications on each of the used machines.
+
+    1. in the `src/arp-config.h`, modify the Nth entry in `char* apr_entries[]` as this mac address (using `ip link` or `ifconfig`). `N` is aligned to the last digit of the local ip (given the configured L2 forwarding rule). For instance, picking the 3rd entry is because that we set up a `192.168.1.3` as default ip (line 11 in `src/config.h`) for the client. 
+    
+    2. in `src/config.h`, modify `PORT_ID` as 2.
+
     
 6. Run the server
+
     ```bash
     sudo taskset -c 1-12 ./server
     ```
     
-7. Run the client
+    
+8. Run the client
     1. prepare the ycsb logs (**[TODO]**)
     2. run the client
     
