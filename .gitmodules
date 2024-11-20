@@ -10,3 +10,6 @@
 [submodule "caladan"]
 	path = caladan
 	url = https://github.com/doradd-rt/caladan
+[submodule "caracal/felis-controller"]
+	path = caracal/felis-controller
+	url = https://github.com/doradd-rt/felis-controller
