@@ -1,9 +1,6 @@
 [submodule "caracal/felis"]
 	path = caracal/felis
 	url = https://github.com/doradd-rt/felis.git
-[submodule "caracal/felis-controller"]
-	path = caracal/felis-controller
-	url = https://github.com/doradd-rt/felis-controller.git
 [submodule "doradd"]
 	path = doradd
 	url = https://github.com/doradd-rt/doradd.git
