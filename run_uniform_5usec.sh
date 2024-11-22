@@ -44,12 +44,10 @@ echo -e "${BOLD}${RED}Duration: ${DURATION} seconds${RESET}"
 
 # Run the Client for Each Load Interval
 for i in 100 50 25 20 15 10 9 8 7 6 5 4 3 2 1; do
-    CURRENT_LOG="${script_dir}/${SERVER}_${WORKLOAD}_${i}.log"  # Unique log for each interval
-
-    echo -e "${BOLD}${GREEN}Running client with interval ${i} (log: ${CURRENT_LOG})${RESET}"
+    echo -e "${BOLD}${GREEN}Running client with interval ${i} (log: ${OUT_LOG})${RESET}"
     
     sudo "${CLIENT_SRC_DIR}/src/build/client" \
-        -l 1-10 -- -i "$i" -s "$REPLAY_LOG" -a ycsb -t 192.168.1.2 -d "$DURATION" -l "$CURRENT_LOG"
+        -l 1-10 -- -i "$i" -s "$REPLAY_LOG" -a ycsb -t 192.168.1.2 -d "$DURATION" -l "$OUT_LOG"
     
     if [[ $? -ne 0 ]]; then
         echo "Error: Client failed for interval ${i}"
