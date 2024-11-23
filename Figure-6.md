@@ -174,7 +174,7 @@ sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config
 
 ## Results
 
-The results are located in `~/results` on the client node. The naming of the log is `<DORADD/Non-deter-spin/Non-deter-async>-<uniform/zipfian>-<5/100>usec.txt` . On each line, the first is throughput (rps) and the second is p99 latency (usec).
+The results are located in `~/ppopp-artifcat/results` on the client node. The naming of the log is `<DORADD/Non-deter-spin/Non-deter-async>-<uniform/zipfian>-<5/100>usec.txt` . On each line, the first is throughput (rps) and the second is p99 latency (usec).
 
 ## Troubleshooting
 
