@@ -194,3 +194,6 @@ When the server node running the caladan (i.e., Non-deter-async), under high loa
 ./apps/synthetic/target/release/synthetic(+0x69aa0)[0x5597ddcdfaa0]
 ./apps/synthetic/target/release/synthetic(+0x59a50)[0x5597ddccfa50]
 ```
+
+### 3. DPDK process
+DORADD and Caladan process needs to launch separately and only one can exist at any given point of time. When you see `EAL: Cannot create lock on '/var/run/dpdk/rte/config'. Is another primary process running?`, you migh have forgotten to terminate the another one when try to launching a new server process.
