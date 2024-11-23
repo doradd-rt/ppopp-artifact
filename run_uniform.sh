@@ -65,7 +65,7 @@ for i in "${i_array[@]}"; do
     echo -e "${BOLD}${GREEN}Running client with interval ${i} (log: ${OUT_LOG})${RESET}"
     
     sudo "${CLIENT_SRC_DIR}/src/build/client" \
-        -l 1-10 -- -i "$i" -s "$REPLAY_LOG" -a ycsb -t 192.168.1.2 -d "$DURATION" -l "$OUT_LOG"
+        -l 1-10 -- -i "$i" -s "$REPLAY_LOG" -a ycsb -t 192.168.1.2 -d "$DURATION" -l "$OUT_LOG" -p 5000
     
     if [[ $? -ne 0 ]]; then
         echo "Error: Client failed for interval ${i}"
