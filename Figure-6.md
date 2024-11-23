@@ -2,7 +2,8 @@
 
 To understand the overhead of determinism, we run experiments comparing DORADD and two other non-deterministic systems, i.e., **Non-deter-spinlock** and **Non-deter-async**. 
 
-- [Non-deter-spinlock](https://github.com/doradd-rt/doradd-server/tree/non-deter) is a spinlock-based non-deterministic baseline (located in another branch under doradd-server).
+- [DORADD](https://github.com/doradd-rt/doradd-server/tree/single-dispatcher) is the main baseline (located in single-dispatcher branch under doradd-server).
+- [Non-deter-spinlock](https://github.com/doradd-rt/doradd-server/tree/non-deter) is a spinlock-based non-deterministic baseline (located in non-deter branch under doradd-server).
 - [Non-deter-async-mutex](https://github.com/doradd-rt/caladan) runs Caladan with its asynchronous mutex.
 
 ## Step 0 - Testbed Setup
