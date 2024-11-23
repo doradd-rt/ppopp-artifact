@@ -67,6 +67,24 @@ setup_non_deter_spin() {
 
 setup_non_deter_async() {
     echo "Setting up server for Non-deter-async with workload $WORKLOAD"
+    pushd $CALADAN_DIR
+    pushd apps/synthetic
+
+    # use the calibrated result for d6515
+    if [[ "$WORKLOAD" == "5" ]]; then
+        cycle=1921
+    else
+        cycle=38413
+    fi
+ 
+    # set workload spin cycles (assuming after calibration)
+    NEW_LINE="for i in 0..$cycle {"
+    FILE="$CALADAN_DIR/apps/synthetic/src/fakework.rs"
+    sed -i "125s|.*|$NEW_LINE|" "$FILE"
+
+    cargo build --release
+    popd
+    popd
 }
 
 # Match SERVER and call appropriate function

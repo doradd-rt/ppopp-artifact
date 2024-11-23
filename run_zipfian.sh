@@ -12,6 +12,19 @@ fi
 SERVER=$1 # DORADD/Non-deter-spin/Non-deter-async
 WORKLOAD=$2 # 5/100
 
+# incoming load config for Non-deter-async
+i_5=(5 8 12 20 25)
+i_100=(125 125 150 200 400)
+# Select the appropriate -i values array
+if [[ "$WORKLOAD" == "5" ]]; then
+    i_values=("${i_5[@]}")  # Use the 1st array
+elif [[ "$WORKLOAD" == "100" ]]; then
+    i_values=("${i_100[@]}")  # Use the 2nd array
+else
+    echo -e "\033[0;31mError: Invalid WORKLOAD value. Use 5 or 100.\033[0m"
+    exit 1
+fi
+
 zipf_array=(0.50 0.80 0.90 0.95 0.99)
 
 if ! [[ "$WORKLOAD" == "5" || "$WORKLOAD" == "100" ]]; then
@@ -42,7 +55,14 @@ echo -e "${BOLD}${BLUE}Running workload: ${WORKLOAD} on server: ${SERVER}${RESET
 echo -e "${BOLD}${RED}Duration: ${DURATION} seconds${RESET}"
 
 # Run the Client for zipfian log 
-for zipf_s in "${zipf_array[@]}"; do
+for idx in "${!zipf_array[@]}"; do
+    zipf_s=${zipf_array[$idx]}
+    # Determine the -i value based on SERVER
+    if [[ "$SERVER" == "Non-deter-async" ]]; then
+        i_value=${i_values[$idx]}  # Use the specific values
+    else
+        i_value=10  # Default or fixed value for other servers
+    fi
     OUT_LOG="${OUT_DIR}/${SERVER}_zipfian_${zipf_s}_${WORKLOAD}usec.log"
     REPLAY_LOG="${CLIENT_SRC_DIR}/scripts/gen-replay-log/ycsb_zipfian_${zipf_s}_no_cont.txt"
 
@@ -62,7 +82,7 @@ for zipf_s in "${zipf_array[@]}"; do
     echo -e "${BOLD}${YELLOW}Output log: ${OUT_LOG}${RESET}"
    
     sudo "${CLIENT_SRC_DIR}/src/build/client" \
-        -l 1-10 -- -i 5 -s "$REPLAY_LOG" -a ycsb -t 192.168.1.2 -d "$DURATION" -l "$OUT_LOG"
+        -l 1-10 -- -i $i_value -s "$REPLAY_LOG" -a ycsb -t 192.168.1.2 -d "$DURATION" -l "$OUT_LOG" -p 5000
     
     if [[ $? -ne 0 ]]; then
         echo "Error: Client failed for interval ${i}"
