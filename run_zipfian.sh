@@ -61,7 +61,7 @@ for idx in "${!zipf_array[@]}"; do
     if [[ "$SERVER" == "Non-deter-async" ]]; then
         i_value=${i_values[$idx]}  # Use the specific values
     else
-        i_value=10  # Default or fixed value for other servers
+        i_value=2
     fi
     OUT_LOG="${OUT_DIR}/${SERVER}_zipfian_${zipf_s}_${WORKLOAD}usec.log"
     REPLAY_LOG="${CLIENT_SRC_DIR}/scripts/gen-replay-log/ycsb_zipfian_${zipf_s}_no_cont.txt"
