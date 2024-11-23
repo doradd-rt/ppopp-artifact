@@ -30,7 +30,7 @@ BLUE='\033[1;34m'
 BOLD='\033[1m'
 RESET='\033[0m'  # Reset to default
 
-DURATION=50
+DURATION=60
 
 # Script Directory
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
