@@ -14,7 +14,7 @@ WORKLOAD=$2 # 5/100
 
 # incoming load config for Non-deter-async
 i_5=(5 8 12 20 25)
-i_100=(125 125 150 200 400)
+i_100=(125 125 150 200 250)
 # Select the appropriate -i values array
 if [[ "$WORKLOAD" == "5" ]]; then
     i_values=("${i_5[@]}")  # Use the 1st array
