@@ -58,9 +58,6 @@ const char *arp_entries[] = {
     sudo ./scripts/setup_machine.sh
     
     # build apps
-    # FIXME (check if installed in the latest profile)
-    # curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly-2024-01-30
-    # . "$HOME/.cargo/env"
     pushd apps/synthetic
     cargo clean
     cargo update
@@ -83,7 +80,7 @@ const char *arp_entries[] = {
 2. Start the client
     
     ```
-    sudo ./client -l 4-8 -- -i 1000 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 10 -l /tmp/hello-world-1.log
+    sudo ~/rpc-dpdk-client/src/build/client -l 4-8 -- -i 1000 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 10 -l /tmp/hello-world-1.log
     ```
     
     You should see the latency and throughput printed out after 10 seconds.
@@ -94,25 +91,26 @@ const char *arp_entries[] = {
 1. Start the iokernel
     
     ```
-    sudo ./iokerneld ias noht
+    sudo ~/caladan/iokerneld ias noht
     ```
     
 2. Start the server (on another tmux pane)
     
     ```
-    sudo ./apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server
+    sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server
     ```
     
     Note: Caladan requires a calibration phase to get the accurate fake work cycles. We have done this calibration on d6515 and [set the cycles](https://github.com/doradd-rt/caladan/blob/52adfd1c5b403e3d89fb69f20db2aa569f5a4adc/apps/synthetic/src/fakework.rs#L124) accordingly. If you run on our caladan fork on other types of machines, you should first run calibration as below.
     
     ```
-    sudo ./apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server --calibrate
+    sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server --calibrate
     ```
     
 3. Start the client
+   Note: unlike DORADD, you need to specify the udp port here via `-p 5000`
     
     ```
-    sudo ./client -l 4-8 -- -i 1000 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 10 -l /tmp/hello-world-2.log -p 5000
+    sudo ~/rpc-dpdk-client/src/build/client -l 4-8 -- -i 1000 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 10 -l /tmp/hello-world-2.log -p 5000
     ```
     
     You should see the latency and throughput printed out after 10 seconds.
@@ -170,8 +168,8 @@ You should replace the DORADD in above commands with `Non-deter-spin` , then rep
 For `Non-deter-async` , other than replacing the name, at step b, you should use below commands to launch the server. Then repeat the above steps.
 
 ```bash
-sudo ./iokerneld ias noht # start the iokernel
-sudo ./apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server
+sudo ~/caladan/iokerneld ias noht # start the iokernel
+sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server
 ```
 
 ## Results
@@ -182,7 +180,7 @@ The results are located in `~/results` on the client node. The naming of the log
 
 ### 1. Network configuration
 
-If you see the see client printing zero throughput or latency, it might mean 1) the request/reply is not forwarded successfully, you should check step 0.1 of this readme to make sure the MAC address is carefully set.
+If you see the see client printing zero throughput, it might mean 1) the request/reply is not forwarded successfully, you should check step 0.1 of this readme to make sure the MAC address is carefully set.
 
 ### 2. Overloaded Caladan
 
