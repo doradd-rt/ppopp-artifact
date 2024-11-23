@@ -16,7 +16,7 @@ WORKLOAD=$2 # 5/100
 if [[ "$WORKLOAD" == "5" ]]; then
     i_array=(100 50 25 20 15 10 9 8 7 6 5 4 3 2 1)
 elif [[ "$WORKLOAD" == "100" ]]; then
-    i_array=(100 50 25 20 18 16 15 14 13 12 11 10)
+    i_array=(1000 500 250 200 180 160 150 140 130 120 110 100)
 else
     echo -e "${RED}Error: Invalid WORKLOAD value. Use 5 or 100.${RESET}"
     exit 1

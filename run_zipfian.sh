@@ -14,7 +14,7 @@ WORKLOAD=$2 # 5/100
 
 zipf_array=(0.50 0.80 0.90 0.95 0.99)
 
-if ![[ "$WORKLOAD" == "5" || "$WORKLOAD" == "100" ]]; then
+if ! [[ "$WORKLOAD" == "5" || "$WORKLOAD" == "100" ]]; then
     echo -e "${RED}Error: Invalid WORKLOAD value. Use 5 or 100.${RESET}"
     exit 1
 fi
