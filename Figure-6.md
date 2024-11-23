@@ -107,7 +107,8 @@ const char *arp_entries[] = {
     ```
     
 3. Start the client
-   Note: unlike DORADD, you need to specify the udp port here via `-p 5000`
+
+   Note: unlike running for DORADD, you need to specify the udp port here via `-p 5000`
     
     ```
     sudo ~/rpc-dpdk-client/src/build/client -l 4-8 -- -i 1000 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 10 -l /tmp/hello-world-2.log -p 5000
