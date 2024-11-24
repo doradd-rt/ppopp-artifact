@@ -14,7 +14,7 @@ This experiment needs to run on two Cloudlab **d6515** nodes (one client node an
 
 Currently, we need to specify the mac addresses in `~/rpc-dpdk-client` (client node) and `~/doradd-server` (server node) before building the source code.
 
-You need to lookup the mac addresses on both client and server nodes separately and update the ARP entries on both nodes. For d6515 nodes, the mac address of an interface you should looking for is `enp65s0f0np0` (via running `ip link` ). 
+You need to lookup the mac addresses on both client and server nodes separately and update the ARP entries on both nodes. For d6515 nodes, the mac address of an interface you should looking for is `enp65s0f0np0` (via running `ip link show enp65s0f0np0` ). 
 
 For instance, if the client mac address for this interface is `1c:34:da:41:ce:f4` and the server mac address is `1c:34:da:41:ca:bc`. Given we manually set the client IP address is `<subnet>.3` and server IP address is `<subnet>.2` , you need to update the 2nd entry in `src/arp-config.h` as server mac address `1c:34:da:41:ca:bc` , the 3rd entry as client mac address `1c:34:da:41:ce:f4`  based our pre-set L2 forwarding rule. After updating both arp configs (client and server), you should see the `src/arp-config.h` looking like:
 
