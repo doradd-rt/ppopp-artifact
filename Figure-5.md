@@ -18,9 +18,14 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
         - `felis` - the source code of Caracal
         - `felis-controller` - the controller script of Caracal
 2. Prepare input log for workloads
-    
+    ```bash
+    pushd doradd/scripts/
+    ./ycsb/prepare_log.sh
+    ./tpcc/prepare_log.sh
+    popd
+    ```
       
-4. Huge-page setting
+3. Huge-page setting
     - DORADD allocates hugepages in runtime, so before running
         
         ```
@@ -33,12 +38,10 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
         sudo su -c "echo 51200 >  /proc/sys/vm/nr_hugepages"
         ```
         
-5. CPU frequency
-    
-    You should set the frequency mode to performance by 
+4. Set CPU frequency as performance mode
     
     ```
-    ./set_freq.sh
+    ./doradd/scripts/set_perf_freq.sh
     ```
     
 
@@ -48,8 +51,15 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
 2. Caracal - Please refer to `./caracal/felis/README.md` and `./caracal/felis-controller/README.md`
 
 ## Experiments
+[TODO] add time
 1. DORADD
+   ```bash
+   pushd doradd/scripts
+   ./ycsb/run_all_ycsb.sh # run ycsb
+   ./tpcc/run_all_tpcc.sh # run tpcc
+   popd
+   ```
+   The results is located at `doradd/scripts/ycsb/{no/mod/high}_cont.res` and `doradd/scripts/tpcc/stats/tpcc_{no/mod/high/split}_cont.res`.
 
 2. Caracal - Please refer to `./caracal/README.md` for comprehensive instructions
 
-## Results
