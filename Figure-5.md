@@ -19,11 +19,15 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
         - `felis-controller` - the controller script of Caracal
 2. Prepare input log for workloads
     ```bash
-    pushd doradd/scripts/
-    ./ycsb/prepare_log.sh
-    ./tpcc/prepare_log.sh
+    pushd doradd/scripts/ycsb
+    ./prepare_log.sh
+    popd
+
+    pushd doradd/scripts/tpcc
+    ./prepare_log.sh
     popd
     ```
+    Then you should find input logs named as `ycsb_uniform_<cont>.txt` in `doradd/scripts/ycsb` and `tpcc_<cont>.txt` in `doradd/scripts/tpcc/input-log`.
       
 3. Huge-page setting
     - DORADD allocates hugepages in runtime, so before running
@@ -52,14 +56,50 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
 
 ## Experiments
 [TODO] add time
-1. DORADD
+
+### DORADD
    ```bash
-   pushd doradd/scripts
-   ./ycsb/run_all_ycsb.sh # run ycsb
-   ./tpcc/run_all_tpcc.sh # run tpcc
+   pushd doradd/scripts/ycsb
+   ./run_all_ycsb.sh # run ycsb
+   popd
+
+   pushd doradd/scripts/tpcc
+   ./run_all_tpcc.sh # run tpcc
    popd
    ```
-   The results is located at `doradd/scripts/ycsb/{no/mod/high}_cont.res` and `doradd/scripts/tpcc/stats/tpcc_{no/mod/high/split}_cont.res`.
+   Upon running, you should see similar following logs
+   ```
+    allocated huge pages
+    Init and Run - Dispatcher Pipelines
+    Hello deterministic world!
+    allocated huge pages
+    spawn - 249124.476628 tx/s
+    exec  - 249124.476628 tx/s
+    spawn - 249942.546956 tx/s
+    exec  - 249941.297244 tx/s
+    spawn - 249706.788359 tx/s
+    exec  - 249706.788359 tx/s
+    spawn - 249987.165034 tx/s
+    exec  - 249987.165034 tx/s
+    spawn - 249608.500923 tx/s
+    exec  - 249608.500923 tx/s
+    entire reqs are 1000000
+    flush latency stats
+    terminate called without an active exception
+    ./ycsb/run_all_ycsb.sh: line 17: 299801 Aborted                 sudo taskset -c 4-11 ./ycsb -n 8 $log -i $ia
+    exp:4000-latency.log
+   ```
 
-2. Caracal - Please refer to `./caracal/README.md` for comprehensive instructions
+- YCSB results: `doradd/src/bench/build/{no/mod/high}_cont.res`
+- TPCC-NP results: `doradd/scripts/tpcc/stats/tpcc_{no/mod/high/split}_cont.res`.
+- On each row, the first number is p99 latency in usec, and the second is the throughput (request per second). For example,
+  ```
+  18 249810
+  20 499757
+  .. ......
+  ```
+   
+
+### Caracal
+Please refer to `./caracal/README.md` for comprehensive instructions
 
