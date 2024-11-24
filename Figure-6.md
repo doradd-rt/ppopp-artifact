@@ -119,7 +119,7 @@ const char *arp_entries[] = {
 
 ## Experiments (Estimated duration: 2h)
 
-The whole entire involves three server variants and different synthetic workloads (5usec/100usec, uniform/zipfian). We provide a setup script on the server node (build) to ease the benchmarking before real runs.
+The entire experiment involves three server variants and different synthetic workloads (5usec/100usec, uniform/zipfian). We provide a setup script on the server node (build) to ease the benchmarking before real runs.
 
 1. Run DORADD for all 5usec workloads 
     1. Setup and build for 5usec workload on the server (server node)
