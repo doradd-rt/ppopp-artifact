@@ -21,14 +21,13 @@ The code has been tested primarily on Ubuntu 22.04. To fully reproduce the resul
 
 ## Experiments Summary
 
+Estimated time to run all experiments: 5h ~ 6h. It will take 1h human time.
+
+
 | **Experiments** | **Instructions** | **Testbed** | **Human time** | **Machine time** |
 | --- | --- | --- | --- | --- |
-| 1. DORADD v.s. Caracal | [Figure-5.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-5.md) | Local |  |  |
-| 2. DORADD v.s. Non-deterministic Systems | [Figure-6.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-6.md) | Cloudlab |  |  |
-| 3. Primary-backup Replication | [Figure-7.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-7.md) | Cloudlab |  |  |
-| 4. Perf Analysis | [Figure-8.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-8.md) | Local |  |  |
-| 5. Pipeline Analysis | [Figure-9.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-9.md) | Local |  |  |
-
-### How to use Cloudlab
-
-TODO
+| 1. DORADD v.s. Caracal | [Figure-5.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-5.md) | Local | 5 min | 2h |
+| 2. DORADD v.s. Non-deterministic Systems | [Figure-6.md](http://Figure-6.mdhttps://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-6.md) | Cloudlab | 10 min | 2h |
+| 3. Primary-backup Replication | [Figure-7.md](http://Figure-7.mdhttps://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-7.md) | Cloudlab | 10 min | 20 min |
+| 4. Perf Analysis | [Figure-8.md](http://Figure-8.mdhttps://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-8.md) | Local | 5 min | 10 min |
+| 5. Pipeline Analysis | [Figure-9.md](https://github.com/doradd-rt/ppopp-artifact/blob/main/Figure-9.md) | Local | 5 min | 10 min |
