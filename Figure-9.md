@@ -13,16 +13,10 @@ cd doradd/src/bench/pipeline-profile
 make
 ```
 
-### Hello-world Example
+### Run
 
 To run the program, one should specify the core counts in the pipeline (larger than 1), and the workload type: read or write.
 
 ```bash
 sudo ./pipeline <core_cnt> <read/write>
-```
-
-### Run 
-
-```bash
-./run_pipeline.sh # (estimated time: 5 min)
 ```
