@@ -9,7 +9,7 @@ For the proposed core-pipelining techniques, we study the introduced overheads a
 The source code is at [app/pipeline-profile](https://github.com/doradd-rt/doradd/tree/main/app/pipeline-profile).
 
 ```bash
-cd doradd/src/bench/pipeline-profile
+cd app/pipeline-profile
 make
 ```
 
