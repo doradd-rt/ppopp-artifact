@@ -28,7 +28,7 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
     ./fig5_prepare_ycsb_log.sh
     ./fig5_prepare_tpcc_log.sh
     ```
-    Then you should find input logs named as `ycsb_uniform_<cont>.txt` in `./fig5-input-log`.
+    Then you should find input logs named as `ycsb_uniform_<cont>.txt` and `tpcc_<cont>.txt` in `./fig5-input-log`.
       
 4. Huge-page setting
     - DORADD allocates hugepages in runtime, so before running
