@@ -4,9 +4,6 @@
 [submodule "doradd"]
 	path = doradd
 	url = https://github.com/doradd-rt/doradd.git
-[submodule "doradd-server"]
-	path = doradd-server
-	url = https://github.com/doradd-rt/doradd-server
 [submodule "caladan"]
 	path = caladan
 	url = https://github.com/doradd-rt/caladan
