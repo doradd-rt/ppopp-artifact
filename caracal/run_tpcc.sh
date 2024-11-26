@@ -1,5 +1,6 @@
 pushd felis
 git submodule update --init
+git checkout master
 buck build db_release
 popd
 
