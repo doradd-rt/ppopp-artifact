@@ -1,4 +1,7 @@
-# Instructions
+# Cloudlab Manual Instructions for DORADD
+
+If you would like to manually test DORADD on d6515, c6525-100g or c6525-25g. You can follow the following instructions.
+If you use c6525-25g machines and try to replicate the results, you may see different results in the form of lower raw throughputs, because the system may get limited by the NIC bandwidth.
 
 1. Install dependencies and setup DPDK on Ubuntu 22.04 
     
@@ -64,12 +67,18 @@
     
     
 8. Run the client
-    1. prepare the ycsb logs (**[TODO]**)
-    2. run the client
+    1. prepare the ycsb logs
+    ```bash
+    pushd scripts/gen-replay-log
+    g++ -O3 generate_ycsb_zipf.cc
+    ./a.out -d uniform -c no_cont
+    popd
+    ```
+    3. run the client
     
     ```bash
     ninja
-    sudo ./client -l 4-12 -- -i 100 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 30 -l /tmp/test.log
+    sudo ./client -l 4-11 -- -i 100 -s ~/rpc-dpdk-client/scripts/gen-replay-log/ycsb_uniform_no_cont.txt -a ycsb -t 192.168.1.2 -d 30 -l /tmp/test.log
     ```
 
 ### Issues / things to watch out for
