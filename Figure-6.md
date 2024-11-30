@@ -97,13 +97,13 @@ const char *arp_entries[] = {
 2. Start the server (on another tmux pane)
     
     ```
-    sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server
+    sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config ~/caladan/server.config --mode spawner-server
     ```
     
     Note: Caladan requires a calibration phase to get the accurate fake work cycles. We have done this calibration on d6515 and [set the cycles](https://github.com/doradd-rt/caladan/blob/52adfd1c5b403e3d89fb69f20db2aa569f5a4adc/apps/synthetic/src/fakework.rs#L124) accordingly. If you run on our caladan fork on other types of machines, you should first run calibration as below.
     
     ```
-    sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server --calibrate
+    sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config ~/caladan/server.config --mode spawner-server --calibrate
     ```
     
 3. Start the client
@@ -125,7 +125,7 @@ The entire experiment involves three server variants and different synthetic wor
     1. Setup and build for 5usec workload on the server (server node)
         
         ```
-        ./server_setup.sh DORADD 5
+        ~/ppopp-artifact/server_env.sh DORADD 5
         ```
         
     2. Start the server (server node)
@@ -137,15 +137,15 @@ The entire experiment involves three server variants and different synthetic wor
     3. Start the client (client node)
         
         ```bash
-        ./run_uniform.sh DORADD 5 # 15 mins
-        ./run_zipfian.sh DORADD 5 # 5 mins
+        ~/ppopp-artifact/run_uniform.sh DORADD 5 # 15 mins
+        ~/ppopp-artifact/run_zipfian.sh DORADD 5 # 5 mins
         ```
         
 2. Run DORADD for all 100usec workloads
     1. Setup and build for 5usec workload on the server (server node)
         
         ```
-        ./server_setup.sh DORADD 100
+        ~/ppopp-artifact/server_env.sh DORADD 100 
         ```
         
     2. Start the server (server node)
@@ -157,20 +157,21 @@ The entire experiment involves three server variants and different synthetic wor
     3. Start the client (client node)
         
         ```bash
-        ./run_uniform.sh DORADD 100 # 15 mins
-        ./run_zipfian.sh DORADD 100 # 5 mins
+        ~/ppopp-artifact/run_uniform.sh DORADD 100 # 15 mins
+        ~/ppopp-artifact/run_zipfian.sh DORADD 100 # 5 mins
         ```
         
 
-Then we can change to other two server variants, Non-deter-spin and Non-deter-async. 
+Then we can change to other two server variants, `Non-deter-spin`` and `Non-deter-async`. 
 
 You should replace the DORADD in above commands with `Non-deter-spin` , then repeat the above process. For instance, `<.sh> Non-deter-spin 5` or  `<.sh> Non-deter-spin 100` 
 
-For `Non-deter-async` , other than replacing the name, at step b, you should use below commands to launch the server. Then repeat the above steps.
+For `Non-deter-async` , in addition to replacing the DORADD with `Non-deter-async`, you should use below commands to launch the server at step ii. Then repeat the above steps.
 
 ```bash
 sudo ~/caladan/iokerneld ias noht # start the iokernel
-sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config server.config --mode spawner-server
+# Note: in another tmux pane
+sudo ~/caladan/apps/synthetic/target/release/synthetic 192.168.1.2:5000 --config ~/caladan/server.config --mode spawner-server
 ```
 
 ## Results

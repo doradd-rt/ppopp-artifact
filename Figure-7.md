@@ -98,7 +98,7 @@ The entire experiments involves two variants. We provide a setup script on the s
     2. Start the client (client node)
         
         ```
-        ./run_replication.sh DORADD
+        ~/ppopp-artifact/run_replication.sh DORADD
         ```
         
 2. Run single-threaded replication
@@ -113,7 +113,7 @@ The entire experiments involves two variants. We provide a setup script on the s
     2. Start the client (client node)
         
         ```
-        ./run_replication.sh Single-threaded
+        ~/ppopp-artifact/run_replication.sh Single-threaded
         ```
         
 
