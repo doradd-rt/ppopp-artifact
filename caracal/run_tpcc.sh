@@ -6,6 +6,7 @@ popd
 
 pushd felis-controller
 sudo rm -rf ./out # clean build
+git checkout master
 ./mill FelisController.assembly
 popd
 
