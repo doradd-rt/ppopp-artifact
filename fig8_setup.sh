@@ -49,21 +49,21 @@ input_gen_dir=${doradd_dir}/scripts/ycsb
 input_log_dir=${input_gen_dir}/profile-log
 mkdir -p $input_log_dir
 
-setup_system_variant() {
 
-  # FIXME
+setup_system_variant() {
+  # Define build flags based on the version
   case $VERSION in
     v0)
       build_flags="" # No extra build flags
       ;;
     v1)
-      build_flags="-DCMAKE_CXX_FLAGS=\"-DPREFETCH\""
+      build_flags="-DPREFETCH"
       ;;
     v2)
-      build_flags="-DCMAKE_CXX_FLAGS=\"-DPREFETCH -DCORE_PIPE -DTEST_TWO\""
+      build_flags="-DPREFETCH -DCORE_PIPE -DTEST_TWO"
       ;;
     v3)
-      build_flags="-DCMAKE_CXX_FLAGS=\"-DPREFETCH -DCORE_PIPE -DINDEXER\""
+      build_flags="-DPREFETCH -DCORE_PIPE -DINDEXER"
       ;;
     *)
       echo "Invalid version specified. Use one of: v0, v1, v2, v3."
@@ -71,8 +71,9 @@ setup_system_variant() {
       ;;
   esac
 
-  pushd $build_dir
-  cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release $build_flags
+  # Run cmake with properly quoted flags
+  pushd "$build_dir"
+  cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="$build_flags"
   ninja
   popd
 }
