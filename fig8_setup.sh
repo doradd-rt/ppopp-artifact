@@ -54,16 +54,16 @@ setup_system_variant() {
   # Define build flags based on the version
   case $VERSION in
     v0)
-      build_flags="" # No extra build flags
+      build_flags="-DRPC_LATENCY -DLOG_LATENCY"
       ;;
     v1)
-      build_flags="-DPREFETCH"
+      build_flags="-DRPC_LATENCY -DLOG_LATENCY -DPREFETCH"
       ;;
     v2)
-      build_flags="-DPREFETCH -DCORE_PIPE -DTEST_TWO"
+      build_flags="-DRPC_LATENCY -DLOG_LATENCY -DPREFETCH -DCORE_PIPE -DTEST_TWO"
       ;;
     v3)
-      build_flags="-DPREFETCH -DCORE_PIPE -DINDEXER"
+      build_flags="-DRPC_LATENCY -DLOG_LATENCY -DPREFETCH -DCORE_PIPE -DINDEXER"
       ;;
     *)
       echo "Invalid version specified. Use one of: v0, v1, v2, v3."
@@ -128,12 +128,12 @@ setup_parameters() {
     new_line_2+="row$i, "
   done
   new_line_2=${new_line_2%, }
-  new_line_2+=") << [ws_cap]"
-  if ! sed -n '101p' "$ycsb_file" | grep -q "row"; then
-    echo "Warning: Line 101 in $ycsb_file does not contain 'row'. Aborting replacement."
+  new_line_2+=") << [ws_cap, init_time]"
+  if ! sed -n '98p' "$ycsb_file" | grep -q "row"; then
+    echo "Warning: Line 98 in $ycsb_file does not contain 'row'. Aborting replacement."
     return 1
   fi
-  sed -i "101s|.*|$new_line_2|" "$ycsb_file"
+  sed -i "98s|.*|$new_line_2|" "$ycsb_file"
 
   # 4. acq_type
   local new_line_3="("
