@@ -17,7 +17,6 @@ The code has been tested primarily on Ubuntu 22.04. To fully reproduce the resul
 - These experiments are designed to run on **CloudLab** using **three** **d6515 nodes**.
 - We provide a [CloudLab experiment profile](https://github.com/doradd-rt/doradd-cloudlab-profile) to facilitate the setup of the machines. You can follow this [guide](https://github.com/doradd-rt/ppopp-artifact/blob/main/doradd-cloudlab-instructions.pdf) to setup on cloudlab.
 - Please **reserve these nodes in advance**, as they may not always be available.
-- If you are unfamiliar with CloudLab, see the comprehensive instructions below.
 
 ## Experiments Summary
 
