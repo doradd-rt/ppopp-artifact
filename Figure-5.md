@@ -87,12 +87,21 @@ This experiment compares DORADD with Caracal, the state-of-the-art deterministic
 
 - YCSB results: `fig5-results/ycsb/{no/mod/high}_cont.res`
 - TPCC-NP results: `fig5-results/tpcc/{no/mod/high/split}_cont.res`.
-- On each row, the first number is p99 latency in usec, and the second is the throughput (request per second). For example,
+- On each row, the first number is p99 latency in microsecond, and the second is the throughput (request per second). For example,
   ```
   18 249810
   20 499757
   .. ......
   ```
+
+#### Troubleshooting
+1. Uninitialized submodule when building DORADD
+   ```
+    fatal error: cpp/when.h: No such file or directory
+        5 | #include <cpp/when.h>
+          |          ^~~~~~~~~~~~
+   ```
+   You should run `git submodule update --init --recursive`.
 
 ### Caracal
 
