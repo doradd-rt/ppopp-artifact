@@ -57,3 +57,20 @@ es100-res
 - es100 means using epoch size 100
 - the left column is throughput in Mrps
 - the right column is tail latency in millisecond
+
+### Troubleshooting
+1. "buck not found"
+   Please follow the instructions in `./install_dependencies.sh` to check buck installation or paths.
+   
+2. "Failed to create cache dir" when starting felis-controller
+   When you see the following messages at running `java -jar <path-to-controller>/FelisController/assembly.dest/out.jar`
+   ```
+   Exception in thread "main" java.lang.IllegalStateException: Failed to create cache dir
+        at io.vertx.core.file.impl.FileResolver.setupCacheDir(FileResolver.java:332)
+        at io.vertx.core.file.impl.FileResolver.<init>(FileResolver.java:87)
+        at io.vertx.core.impl.VertxImpl.<init>(VertxImpl.java:168)
+   ```
+   Some dir permission might be wrong, you can try to add `-Dvertx.cacheDirBase=<other-path>` in the command as `java -Dvertx.cacheDirBase=/tmp/file -jar ...`.
+   The expected output would be `Console Client connecting to controller 127.0.0.1 on port ..`
+4. "java.net.BindException: Address already in use"
+   This indicates the attempt to re-start another http server is failed given you have already setup before. You can simply ignore this.
