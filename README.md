@@ -1,6 +1,6 @@
 # PPoPP-Artifact
 
-This repository contains the artifact for our PPoPP’25 paper: **DORADD: Deterministic Parallel Execution in the Era of 𝜇s-scale Computing**. It includes the source code, detailed instructions, and scripts necessary for reproducing the experiments presented in the paper.
+This repository contains the artifact for our PPoPP’25 paper: **DORADD: Deterministic Parallel Execution in the Era of Microsecond-Scale Computing**. It includes the source code, detailed instructions, and scripts necessary for reproducing the experiments presented in the paper.
 
 The code has been tested primarily on Ubuntu 22.04. To fully reproduce the results, two testbeds are required:
 
